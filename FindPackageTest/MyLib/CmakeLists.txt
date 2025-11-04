@@ -16,14 +16,17 @@ target_include_directories(MyLib
 
         # => Khi dang build cuc bo thi include tu ma nguon, con khi find_package() thi include thi thu muc cai dat
 
-# Install cac file cua package cho find_package()
-# Buoc nay se tao thanh package MyLib hoan chinh de co the dung cho find_package()
-install(TARGETS MyLib EXPORT MyLibTargets
+# Install cac file thanh package cho find_package() co the doc duoc
+# ARCHIVE DESTINATION: Noi luu tru thu vien tinh (.a = archive)
+# LIBRARY DESTINATION: Noi luu tru thu vien dong (.dll/.so/.dylib)
+install(TARGETS MyLib 
+        EXPORT MyLibTargets
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib
         RUNTIME DESTINATION bin)
 
-install(FILES mylib.hpp DESTINATION include)
+install(FILES mylib.hpp 
+        DESTINATION include)
 
 # Xuat file config de project khac co the tim thay
 install(EXPORT MyLibTargets

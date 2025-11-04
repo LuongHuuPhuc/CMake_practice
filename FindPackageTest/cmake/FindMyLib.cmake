@@ -7,10 +7,11 @@ set(MYLIB_ROOT "${CMAKE_CURRENT_LIST_DIR}/../MyLib/install")
 
 # Tim file header de kiem tra xem thu vien co ton tai khong
 find_path(MYLIB_INCLUDE_DIR 
-          NAMES mylib.hpp
-          PATHS "${MYLIB_ROOT}")
+          NAMES mylib.hpp  # Ten file can tim
+          PATHS "${MYLIB_ROOT}" # Duong dan 
+          PATH_SUFFIXES include) # Duong dan kem
 
-# Tim file thu vien .a hoac .dll sau khi build
+# Danh sach cac thu vien .a hoac .dll can lien ket
 find_library(MYLIB_LIBRARY 
              NAMES MyLib
              PATHS "${MYLIB_ROOT}"
