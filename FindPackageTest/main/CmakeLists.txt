@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.10)
+project(main)
+
+set(CMAKE_CXX_STANDARD 17)
+
+# Them duong dan de find_package() tim den file FindMyLib.cmake
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+
+# Tim MyLib (se goi toi FindMyLib.cmake)
+find_package(MyLib REQUIRED)
+
+add_executable(main main.cpp)
+
+# Link thu vien MyLib vao 
+target_link_libraries(main PRIVATE MyLib::MyLib)

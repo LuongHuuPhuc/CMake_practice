@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 3.10)
+project(MyLib)
+
+# Tao thu vien static
+add_library(MyLib STATIC mylib.cpp)
+
+# Xuat duong dan include de ben ngoai co the include duoc
+# Cau hinh duong dan include hop le cho ca build va install
+target_include_directories(MyLib 
+   PUBLIC 
+        # Khi dang build trong thu muc goc, Cmake se dung duong dan nay (tro ve ma nguon that)
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> 
+
+        # Khi ban install hoac export, Cmake se thay the bang duong dan include - tuc la thu muc header sau khi ban cai dat bang install()
+        $<INSTALL_INTERFACE:include>)
+
+        # => Khi dang build cuc bo thi include tu ma nguon, con khi find_package() thi include thi thu muc cai dat
+
+# Install cac file cua package cho find_package()
+# Buoc nay se tao thanh package MyLib hoan chinh de co the dung cho find_package()
+install(TARGETS MyLib EXPORT MyLibTargets
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin)
+
+install(FILES mylib.hpp DESTINATION include)
+
+# Xuat file config de project khac co the tim thay
+install(EXPORT MyLibTargets
+        FILE MyLibConfig.cmake # install() xong se xuat ra file "MyLibConfig.cmake" => Config mode
+        NAMESPACE MyLib::
+        DESTINATION lib/cmake/MyLib)

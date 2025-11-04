@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(FindPackageTest)
+
+add_subdirectory(MyLib)
+add_subdirectory(main)
