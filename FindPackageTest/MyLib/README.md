@@ -76,13 +76,13 @@ install(EXPORT <export_name>
         NAMESPACE <prefix>
         DESTINATION <path>)
 ```
-- Giải thích từng phần
+Giải thích từng phần:
 |Thành phần|Ý nghĩa|
 |----------|-------|
 |`EXPORT MyLibTargets`|Chính là export group bạn đã định nghĩa trong `install(TARGETS...)` -> Lệnh này sẽ đọc thông tin từ `MyLibTargets` và sinh ra một file `.cmake` chứa metadata của target MyLib|
 |`FILE MyLibConfig.cmake`|Tên file sẽ được sinh ra (ví dụ: MyLibConfig.cmake) File này là file Config Mode mà project khác sẽ tìm thấy khi gọi `find_package(MyLib)`|
-|`NAMESPACE MyLib:`| Khi project khác `find_package(MyLib)` thành công, họ sẽ có thể gọi target dưới tên `MyLib:MyLib` ví dụ lệnh `target_link_libraries(main PRIVATE MyLib::MyLib)`|
-|`DESTINATION lib/cmake/MyLib`|Đường đẫn lưu file `MyLibConfig.cmake` (tính từ prefix)|
+|`NAMESPACE MyLib:`| Khi project khác `find_package(MyLib)` thành công, họ sẽ có thể gọi target dưới tên `MyLib::MyLib` ví dụ lệnh `target_link_libraries(main PRIVATE MyLib::MyLib)`|
+|`DESTINATION lib/cmake/MyLib`|Đường dẫn lưu file `MyLibConfig.cmake` (tính từ prefix)|
 
 ### Note
 - `build/` - Nơi CMake biên dịch tạm thời (obj, exe, lib)
